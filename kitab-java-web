@@ -3,10 +3,29 @@
 	-MySql<depedency>
 2.buat folder entity
 	- buat class sesuai kebutuhan
+	- jika sudah tambah getter and setter
 3.buat folder dao<data acces object>
 	- buat sesuai kebutuhan class entity 
 	- tambahkan [extends PagingAndSortingRepository<Anggota, String>]
 4. buat folder controller 
 	- buat class sesuai kebutuhan
+5. koneksi database 
+	- buka --> src/main/resources/aplication.properties
+	- tambahkan seperti ini:
+		//  koneksi mysql
+		spring.datasource.url=jdbc:mysql://localhost/aplikasicrud
+		spring.datasource.username=aplikasicruduser
+		spring.datasource.password=aplikasicrudpasswd
 
+		// membuat generate database dari maping entity 
+		spring.jpa.generate-ddl=true
+		spring.jpa.show-sql=true
+		spring.jpa.properties.hibernate.format_sql=true
 
+		// merapikan data api json 
+		spring.jackson.serialization.indent_output=true
+
+		// supaya tidak re run spring boot
+		spring.thymeleaf.cache=false
+
+6.
