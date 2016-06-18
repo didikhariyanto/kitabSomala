@@ -1,0 +1,12 @@
+1.spring-boot
+	-Jpa<depedency>
+	-MySql<depedency>
+2.buat folder entity
+	- buat class sesuai kebutuhan
+3.buat folder dao<data acces object>
+	- buat sesuai kebutuhan class entity 
+	- tambahkan [extends PagingAndSortingRepository<Anggota, String>]
+4. buat folder controller 
+	- buat class sesuai kebutuhan
+
+
