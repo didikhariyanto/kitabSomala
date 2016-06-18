@@ -12,7 +12,7 @@
 
 4. buat folder controller
 	- buat class sesuai kebutuhan
-	
+
 5. koneksi database
 	- buka --> src/main/resources/aplication.properties
 	- tambahkan seperti ini:
@@ -32,4 +32,47 @@
 		// supaya tidak re run spring boot
 		spring.thymeleaf.cache=false
 
-6.
+6.crud json
+	***
+	// jika method GET menjalankan ini.
+	@RequestMapping(value = "/anggota", method = RequestMethod.GET)
+	public Page<Anggota> cariAnggota(Pageable page) {
+		return ad.findAll(page);
+	}
+
+-
+// jika insert data menjalankan ini
+	@RequestMapping(value = "/anggota", method = RequestMethod.POST)
+	@ResponseStatus(HttpStatus.CREATED)
+	public void insertAnggotaBaru(@RequestBody @Valid Anggota p) {
+		ad.save(p);
+	}
+
+***
+	// jika update data menjalankan ini
+		@RequestMapping(value = "/anggota/{id}", method = RequestMethod.PUT)
+		@ResponseStatus(HttpStatus.OK)
+		public void updateAnggota(@PathVariable("id") String id, @RequestBody @Valid Anggota p) {
+			p.setId(id);
+			ad.save(p);
+		}
+
+***
+		// mencari data dan respon 404 jika data tidak ada <cari berdasarkan id>
+		@RequestMapping(value = "/anggota/{id}", method = RequestMethod.GET)
+		@ResponseStatus(HttpStatus.OK)
+		public ResponseEntity<Anggota> cariAnggotaById(@PathVariable("id") String id) {
+			Anggota hasil = ad.findOne(id);
+			if (hasil == null) {
+				return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+			}
+			return new ResponseEntity<>(hasil, HttpStatus.OK);
+		}
+
+***
+		// jika delete data menjalankan ini
+		@RequestMapping(value = "/anggota/{id}", method = RequestMethod.DELETE)
+		@ResponseStatus(HttpStatus.OK)
+		public void hapusAnggota(@PathVariable("id") String id) {
+			ad.delete(id);
+		}
