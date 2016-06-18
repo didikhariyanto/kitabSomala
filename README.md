@@ -1,25 +1,25 @@
-1.spring-boot
+# 1.spring-boot
 	-Jpa<depedency>
 	-MySql<depedency>
 
-2.buat folder entity
+# 2.buat folder entity
 	- buat class sesuai kebutuhan
 	- jika sudah tambah getter and setter
 
-3.buat folder dao<data acces object>
+# 3.Buat folder dao<data acces object>
 	- buat sesuai kebutuhan class entity
 	- tambahkan [extends PagingAndSortingRepository<Anggota, String>]
 
-4. buat folder controller
+# 4. buat folder controller
 	- buat class sesuai kebutuhan
 
-5. koneksi database
+# 5. koneksi database
 	- buka --> src/main/resources/aplication.properties
 	- tambahkan seperti ini:
-		//  koneksi mysql
-		spring.datasource.url=jdbc:mysql://localhost/aplikasicrud
-		spring.datasource.username=aplikasicruduser
-		spring.datasource.password=aplikasicrudpasswd
+		 //  koneksi mysql
+		 spring.datasource.url=jdbc:mysql://localhost/aplikasicrud
+		 spring.datasource.username=aplikasicruduser
+		 spring.datasource.password=aplikasicrudpasswd
 
 		// membuat generate database dari maping entity
 		spring.jpa.generate-ddl=true
@@ -32,15 +32,24 @@
 		// supaya tidak re run spring boot
 		spring.thymeleaf.cache=false
 
-6.crud json browser
-	***
+# 6.crud json browser
+***
+tambahkan depedency starter web
+
+    <dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+
+
+  ***
 	// jika method GET menjalankan ini.
 	@RequestMapping(value = "/anggota", method = RequestMethod.GET)
 	public Page<Anggota> cariAnggota(Pageable page) {
 		return ad.findAll(page);
 	}
 
--
+***
 // jika insert data menjalankan ini
 	@RequestMapping(value = "/anggota", method = RequestMethod.POST)
 	@ResponseStatus(HttpStatus.CREATED)
@@ -78,13 +87,16 @@
 		}
 
 
-7. deklarasi aturan java validasi pada entity java class.
+# 7. deklarasi aturan java validasi pada entity java class.
+
+***
 			@NotNull
 			@NotEmpty (tidak boleh di gunakan pada tipe data Date, karena bukan String)
 			@Size(min=3, max=150)
 			@Past (masa lampau, di gunakan untuk data tipe Date)
 			@Email
 
+***
 			- tambahin parameter @valid pada nama controller class java. misal insert dan update
 			contoh coding;
 
@@ -98,4 +110,20 @@
 			---------------------------------------------------------------------
 
 
-8. Themplate engine with thymeleaf
+# 8. Themplate engine with thymeleaf
+
+
+tambahkan depedency sebaigai berikut
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-thymeleaf</artifactId>
+		</dependency>
+***
+    tambahkan folder"Templates" pada
+
+    src/main/resources/templates
+
+
+  - Anotation @controller
+    tidak usah @RestCntroller supaya tidak respon body
