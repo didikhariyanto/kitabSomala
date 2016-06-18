@@ -32,7 +32,7 @@
 		// supaya tidak re run spring boot
 		spring.thymeleaf.cache=false
 
-6.crud json
+6.crud json browser
 	***
 	// jika method GET menjalankan ini.
 	@RequestMapping(value = "/anggota", method = RequestMethod.GET)
@@ -76,3 +76,26 @@
 		public void hapusAnggota(@PathVariable("id") String id) {
 			ad.delete(id);
 		}
+
+
+7. deklarasi aturan java validasi pada entity java class.
+			@NotNull
+			@NotEmpty (tidak boleh di gunakan pada tipe data Date, karena bukan String)
+			@Size(min=3, max=150)
+			@Past (masa lampau, di gunakan untuk data tipe Date)
+			@Email
+
+			- tambahin parameter @valid pada nama controller class java. misal insert dan update
+			contoh coding;
+
+				-------------------------------------------------------------------
+					// jika insert data menjalankan ini
+			@RequestMapping(value = "/anggota", method = RequestMethod.POST)
+			@ResponseStatus(HttpStatus.CREATED)
+			public void insertAnggotaBaru(@RequestBody @Valid Anggota p) {
+				ad.save(p);
+			}
+			---------------------------------------------------------------------
+
+
+8
