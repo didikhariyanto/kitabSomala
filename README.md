@@ -127,3 +127,12 @@ tambahkan depedency sebaigai berikut
 
   - Anotation @controller
     tidak usah @RestCntroller supaya tidak respon body
+  - tambahkan @ResponBody di atas method
+
+
+# 9 CSRF spring-boot
+
+***
+tambahkan PADA HTML DI BAWAH forM
+
+<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
